@@ -1,14 +1,15 @@
 // ==UserScript==
 // @name         CodeUp+
 // @description  CodeUp+
-// @version      0.0.1
+// @version      0.0.2
 // @icon         https://icons.duckduckgo.com/ip2/codeup.kr.ico
-// @updateURL    https://github.com/JadeMin-userscripts/CodeUp-Plus/raw/main/index.user.js
-// @downloadURL  https://github.com/JadeMin-userscripts/CodeUp-Plus/raw/main/index.user.js
+// @updateURL    https://github.com/JadeMin-UserScripts/CodeUp-Plus/raw/main/index.user.js
+// @downloadURL  https://github.com/JadeMin-UserScripts/CodeUp-Plus/raw/main/index.user.js
 // @match        https://www.codeup.kr/*
 // @run-at       document-end
 // ==/UserScript==
 if(location.pathname !== "/submitpage.php") return;
+
 const { editor } = unsafeWindow;
 
 const rid = document.querySelector("input#rid").value;
@@ -75,8 +76,8 @@ int main() {
 \treturn 0;
 };`;
 	editor.session.setValue(`${code}${createAlert("Template autofilled!")}`);
+	editor.gotoLine(4, 1);
 } else {
 	const code = removeAlert(saved.code);
 	editor.session.setValue(`${code}${createAlert("Stored code autofilled!")}`);
 }
-//editor.gotoLine(getSaved().cursor.row, getSaved().cursor.column);
