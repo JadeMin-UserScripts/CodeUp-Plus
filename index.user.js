@@ -63,7 +63,6 @@ editor.setOptions({useSoftTabs: false});
 editor.on('click', onInput);
 //editor.on('change', onInput);
 editorElement.addEventListener('keydown', onInput);
-editor.focus();
 
 if(saved === null) {
 	const code = `#include <stdio.h>
@@ -79,3 +78,4 @@ int main() {
 	editor.session.setValue(`${saved.code}`);
 	editor.gotoLine(saved.cursor.row + 1, saved.cursor.column);
 }
+editor.focus();
