@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         CodeUp+
 // @description  CodeUp+
-// @version      0.1.2
+// @version      0.1.3
 // @icon         https://icons.duckduckgo.com/ip2/codeup.kr.ico
 // @updateURL    https://github.com/JadeMin-UserScripts/CodeUp-Plus/raw/main/index.user.js
 // @downloadURL  https://github.com/JadeMin-UserScripts/CodeUp-Plus/raw/main/index.user.js
