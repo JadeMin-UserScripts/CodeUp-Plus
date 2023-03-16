@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         CodeUp+
 // @description  CodeUp+
-// @version      0.0.3
+// @version      0.0.4
 // @icon         https://icons.duckduckgo.com/ip2/codeup.kr.ico
 // @updateURL    https://github.com/JadeMin-UserScripts/CodeUp-Plus/raw/main/index.user.js
 // @downloadURL  https://github.com/JadeMin-UserScripts/CodeUp-Plus/raw/main/index.user.js
@@ -45,28 +45,24 @@ const removeAlert = (code) => {
 	const re = /\n*(\#\!.*)\n*$/i;
 	return code.replace(re, '');
 };
+const saved = getSaved();
 
 
 
+editor.setOptions({useSoftTabs: false});
 editor.session.on('change', (event, _editor) => {
 	const { row, column } = editor.selection.getCursor();
-	const lastEdit = getSaved() ?? {
-		code: '',
+
+	setSaved({
+		code: removeAlert(editor.session.getValue()),
 		cursor: {
-			row: 4,
-			column: 1
+			row: row,
+			column: column
 		}
-	};
-
-	lastEdit.code = removeAlert(editor.session.getValue());
-	lastEdit.cursor.row = row;
-	lastEdit.cursor.column = column;
-	setSaved(lastEdit, 1800000);
+	}, 1800000);
 });
-editor.setOptions({useSoftTabs: false});
 
 
-const saved = getSaved();
 if(saved === null) {
 	const code = `#include <stdio.h>
 
