@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         CodeUp+
 // @description  CodeUp+
-// @version      0.0.4
+// @version      0.1.0
 // @icon         https://icons.duckduckgo.com/ip2/codeup.kr.ico
 // @updateURL    https://github.com/JadeMin-UserScripts/CodeUp-Plus/raw/main/index.user.js
 // @downloadURL  https://github.com/JadeMin-UserScripts/CodeUp-Plus/raw/main/index.user.js
@@ -12,6 +12,7 @@ if(location.pathname !== "/submitpage.php") return;
 
 const { editor } = unsafeWindow;
 
+const editorElement = editor.textInput.getElement();
 const rid = document.querySelector("input#rid").value;
 const storageName = `last_edit_${rid}`;
 const getSaved = () => {
@@ -45,24 +46,29 @@ const removeAlert = (code) => {
 	const re = /\n*(\#\!.*)\n*$/i;
 	return code.replace(re, '');
 };
+
+
+
 const saved = getSaved();
-
-
-
-editor.setOptions({useSoftTabs: false});
-editor.session.on('change', (event, _editor) => {
+const onChange = event => {
 	const { row, column } = editor.selection.getCursor();
+	const currentCode = editor.session.getValue();
 
-	setSaved({
-		code: removeAlert(editor.session.getValue()),
-		cursor: {
-			row: row,
-			column: column
-		}
-	}, 1800000);
-});
+	if(row !== 0 && column !== 0) {
+		setSaved({
+			code: removeAlert(currentCode),
+			cursor: {
+				row: row,
+				column: column
+			}
+		}, 1800000);
+	}
+};
+editor.setOptions({useSoftTabs: false});
+editor.on('click', onChange);
+editorElement.addEventListener('keydown', onChange);
 
-
+editor.focus();
 if(saved === null) {
 	const code = `#include <stdio.h>
 
@@ -72,8 +78,9 @@ int main() {
 \treturn 0;
 };`;
 	editor.session.setValue(`${code}${createAlert("Template autofilled!")}`);
+	editor.gotoLine(4, 1);
 } else {
 	const code = removeAlert(saved.code);
 	editor.session.setValue(`${code}${createAlert("Stored code autofilled!")}`);
+	editor.gotoLine(saved.cursor.row + 1, saved.cursor.column);
 }
-editor.gotoLine(4, 1);
