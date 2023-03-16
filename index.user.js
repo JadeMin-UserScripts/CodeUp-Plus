@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         CodeUp+
 // @description  CodeUp+
-// @version      0.0.2
+// @version      0.0.3
 // @icon         https://icons.duckduckgo.com/ip2/codeup.kr.ico
 // @updateURL    https://github.com/JadeMin-UserScripts/CodeUp-Plus/raw/main/index.user.js
 // @downloadURL  https://github.com/JadeMin-UserScripts/CodeUp-Plus/raw/main/index.user.js
@@ -76,8 +76,8 @@ int main() {
 \treturn 0;
 };`;
 	editor.session.setValue(`${code}${createAlert("Template autofilled!")}`);
-	editor.gotoLine(4, 1);
 } else {
 	const code = removeAlert(saved.code);
 	editor.session.setValue(`${code}${createAlert("Stored code autofilled!")}`);
 }
+editor.gotoLine(4, 1);
