@@ -1,13 +1,14 @@
 // ==UserScript==
 // @name         CodeUp+
 // @description  CodeUp+
-// @version      0.0.0
+// @version      0.0.1
 // @icon         https://icons.duckduckgo.com/ip2/codeup.kr.ico
+// @updateURL    https://github.com/JadeMin-userscripts/CodeUp-Plus/raw/main/index.user.js
+// @downloadURL  https://github.com/JadeMin-userscripts/CodeUp-Plus/raw/main/index.user.js
 // @match        https://www.codeup.kr/*
 // @run-at       document-end
 // ==/UserScript==
 if(location.pathname !== "/submitpage.php") return;
-
 const { editor } = unsafeWindow;
 
 const rid = document.querySelector("input#rid").value;
