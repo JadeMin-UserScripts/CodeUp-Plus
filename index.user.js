@@ -3,8 +3,8 @@
 // @description  CodeUp+
 // @version      0.1.2
 // @icon         https://icons.duckduckgo.com/ip2/codeup.kr.ico
-// @updateURL    https://xn--hy1bs43ay9g.xn--wv4b36c8wd.ga/index.user.js
-// @downloadURL  https://xn--hy1bs43ay9g.xn--wv4b36c8wd.ga/index.user.js
+// @updateURL    https://github.com/JadeMin-UserScripts/CodeUp-Plus/raw/main/index.user.js
+// @downloadURL  https://github.com/JadeMin-UserScripts/CodeUp-Plus/raw/main/index.user.js
 // @match        https://*.codeup.kr/*
 // @run-at       document-end
 // ==/UserScript==
