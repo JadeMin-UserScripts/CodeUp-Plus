@@ -14,7 +14,7 @@ const { editor } = unsafeWindow;
 
 const editorElement = editor.textInput.getElement();
 const rid = document.querySelector("input#rid").value;
-const storageName = `last_edit_${rid}`;
+const storageName = `editor_${rid}`;
 const getSaved = () => {
 	const saved = JSON.parse(localStorage.getItem(storageName));
 	if(saved === null) return null;
@@ -33,7 +33,7 @@ const setSaved = (obj, expireDate) => {
 		expires: Date.now() + expireDate
 	}));
 };
-//unsafeWindow.clearSaved = ()=> localStorage.clear();
+/*unsafeWindow.clearSaved = ()=> localStorage.clear();
 const createAlert = (message) => {
 	return '';
 
@@ -45,7 +45,7 @@ const removeAlert = (code) => {
 
 	const re = /\n*(\#\!.*)\n*$/i;
 	return code.replace(re, '');
-};
+};*/
 
 
 
@@ -56,7 +56,7 @@ const onChange = event => {
 
 	if(row !== 0 && column !== 0) {
 		setSaved({
-			code: removeAlert(currentCode),
+			code: currentCode,
 			cursor: {
 				row: row,
 				column: column
@@ -67,8 +67,8 @@ const onChange = event => {
 editor.setOptions({useSoftTabs: false});
 editor.on('click', onChange);
 editorElement.addEventListener('keydown', onChange);
-
 editor.focus();
+
 if(saved === null) {
 	const code = `#include <stdio.h>
 
@@ -77,10 +77,9 @@ int main() {
 \t
 \treturn 0;
 }`;
-	editor.session.setValue(`${code}${createAlert("Template autofilled!")}`);
+	editor.session.setValue(`${code}`);
 	editor.gotoLine(4, 1);
 } else {
-	const code = removeAlert(saved.code);
-	editor.session.setValue(`${code}${createAlert("Stored code autofilled!")}`);
+	editor.session.setValue(`${saved.code}`);
 	editor.gotoLine(saved.cursor.row + 1, saved.cursor.column);
 }
