@@ -9,7 +9,6 @@
 // @run-at       document-end
 // ==/UserScript==
 if(location.pathname !== "/submitpage.php") return;
-
 const { editor } = unsafeWindow;
 
 const editorElement = editor.textInput.getElement();
@@ -33,16 +32,12 @@ const setSaved = (obj, expireDate) => {
 		expires: Date.now() + expireDate
 	}));
 };
-/*unsafeWindow.clearSaved = ()=> localStorage.clear();
-const createAlert = (message) => {
-	return '';
-
+//unsafeWindow.clearSaved = ()=> localStorage.clear();
+/*const createAlert = (message) => {
 	const title = "CodeUp-Plus";
 	return `\n\n\n\n#!${title}: ${message}`;
 };
 const removeAlert = (code) => {
-	return code;
-
 	const re = /\n*(\#\!.*)\n*$/i;
 	return code.replace(re, '');
 };*/
@@ -50,7 +45,7 @@ const removeAlert = (code) => {
 
 
 const saved = getSaved();
-const onChange = event => {
+const onInput = event => {
 	const { row, column } = editor.selection.getCursor();
 	const currentCode = editor.session.getValue();
 
@@ -65,8 +60,10 @@ const onChange = event => {
 	}
 };
 editor.setOptions({useSoftTabs: false});
-editor.on('click', onChange);
-editorElement.addEventListener('keydown', onChange);
+editor.on('click', onInput);
+//editor.on('change', onInput);
+editorElement.addEventListener('keydown', onInput);
+editor.focus();
 
 if(saved === null) {
 	const code = `#include <stdio.h>
@@ -82,4 +79,3 @@ int main() {
 	editor.session.setValue(`${saved.code}`);
 	editor.gotoLine(saved.cursor.row + 1, saved.cursor.column);
 }
-editor.focus();
