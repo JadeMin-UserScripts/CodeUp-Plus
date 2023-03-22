@@ -1,13 +1,13 @@
-/**
- * @name CodeUp+
- * @description CodeUp+
- * @version 0.1.3
- * @icon https://icons.duckduckgo.com/ip2/codeup.kr.ico
- * @updateURL https://github.com/JadeMin-UserScripts/CodeUp-Plus/raw/main/index.user.js
- * @downloadURL https://github.com/JadeMin-UserScripts/CodeUp-Plus/raw/main/index.user.js
- * @match https://*.codeup.kr/*
- * @run-at document-end
- */
+// ==UserScript==
+// @name		CodeUp+
+// @description	CodeUp+
+// @version		0.1.3
+// @icon		https://icons.duckduckgo.com/ip2/codeup.kr.ico
+// @updateURL	https://github.com/JadeMin-UserScripts/CodeUp-Plus/raw/main/index.user.js
+// @downloadURL	https://github.com/JadeMin-UserScripts/CodeUp-Plus/raw/main/index.user.js
+// @match		https://*.codeup.kr/*
+// @run-at		document-end
+// ==/UserScript==
 "use strict";(()=>{var{editor:S}=unsafeWindow,v=document.querySelector("input#problem_id").value,o=`editor_${v}`,c=()=>JSON.parse(localStorage.getItem(o)),p=()=>localStorage.removeItem(o),m=()=>{let e=c();return e===null?null:Date.now()>e.expires?(p(),!0):null};m();var s=()=>{let e=c();return e===null?null:e.value},i=(e,n)=>{let t=s();return localStorage.setItem(o,JSON.stringify({value:e,expires:Date.now()+n}))};(({editor:e})=>{if(location.pathname!=="/submitpage.php")return;let n=e.textInput.getElement(),t=s(),r=a=>{let{row:l,column:u}=e.selection.getCursor(),d=e.session.getValue();l!==0&&u!==0&&i({code:d,cursor:{row:l,column:u}},18e5)};if(e.setOptions({useSoftTabs:!1}),e.on("click",r),n.addEventListener("keydown",r),t===null){let a=`#include <stdio.h>
 
 int main() {
