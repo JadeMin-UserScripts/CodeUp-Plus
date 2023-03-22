@@ -10,6 +10,7 @@
 		"@types/greasemonkey": "^4.0.4",
 		"@types/node": "^18.14.2",
 		"esbuild": "^0.17.10",
+		"esbuild-plugin-copy": "^2.1.0",
 		"gh-pages": "^5.0.0",
 		"tsx": "^3.12.3"
 	}
