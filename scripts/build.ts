@@ -11,7 +11,7 @@ const buildType = buildTyping(buildArgv);
 
 
 await build({
-	entryPoints: ["./src/index.ts"],
+	entryPoints: ["./src/userscript/index.ts"],
 	outfile: "./dist/index.user.js",
 	charset: 'utf8',
 
@@ -25,13 +25,13 @@ await build({
 	treeShaking: true,
 	
 	banner: {
-		js: await readFile("./src/meta.ts", 'utf-8')
+		js: await readFile("./src/userscript/meta.ts", 'utf-8')
 	},
 
 	plugins: [
 		copy({
 			assets: {
-				from: ["./src/.page/CNAME", "./src/.page/README.md"],
+				from: ["./src/page/CNAME", "./src/page/README.md"],
 				to: ["./"]
 			}
 		})

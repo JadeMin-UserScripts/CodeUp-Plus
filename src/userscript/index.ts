@@ -1,5 +1,3 @@
-import type { SavedWithExpires } from "./modules/@types/saved.js";
-
 import { getSaved, setSaved } from "./modules/saved.js";
 
 
@@ -21,7 +19,7 @@ import { getSaved, setSaved } from "./modules/saved.js";
 					row: row,
 					column: column
 				}
-			}, 1800000);
+			});
 		}
 	};
 

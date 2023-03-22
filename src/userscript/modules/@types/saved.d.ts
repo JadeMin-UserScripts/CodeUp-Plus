@@ -5,8 +5,3 @@ export declare interface Saved {
 		column: number;
 	};
 }
-
-export declare interface SavedWithExpires {
-	value: Saved;
-	expires: number;
-}
