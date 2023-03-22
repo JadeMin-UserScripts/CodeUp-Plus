@@ -12,8 +12,8 @@ if(location.pathname !== "/submitpage.php") return;
 const { editor } = unsafeWindow;
 
 const editorElement = editor.textInput.getElement();
-const rid = document.querySelector("input#rid").value;
-const storageName = `editor_${rid}`;
+const problemNumber = document.querySelector("input#problem_id").value;
+const storageName = `editor_${problemNumber}`;
 const getSaved = () => {
 	const saved = JSON.parse(localStorage.getItem(storageName));
 	if(saved === null) return null;
