@@ -1,10 +1,9 @@
-import type { BuildOptions } from 'esbuild';
 import type { BuildTypes } from "./@types/build.js";
 
+import { readFile } from 'fs/promises';
 import { build, context } from 'esbuild';
 import { copy } from 'esbuild-plugin-copy';
 import { buildTyping, getCurrentType } from "./@types/build.js";
-import { getMetaString } from "./meta.js";
 
 const buildArgv = process.argv.slice(2)[0] as BuildTypes;
 const buildType = buildTyping(buildArgv);
@@ -17,7 +16,7 @@ await build({
 	charset: 'utf8',
 
 	platform: 'browser',
-	format: 'iife',
+	format: 'esm',
 
 	bundle: true,
 	minify: buildType.PUBLISH,
@@ -26,13 +25,13 @@ await build({
 	treeShaking: true,
 	
 	banner: {
-		js: getMetaString()
+		js: await readFile("./src/meta.ts", 'utf-8')
 	},
 
 	plugins: [
 		copy({
 			assets: {
-				from: ["./src/README.md"],
+				from: ["./src/.page/CNAME", "./src/.page/README.md"],
 				to: ["./"]
 			}
 		})
