@@ -1,0 +1,16 @@
+{
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "tsx ./scripts/build.ts",
+		"publish": "npm run build PUBLISH && tsx ./scripts/publish.ts"
+	},
+	"devDependencies": {
+		"@types/ace": "^0.0.48",
+		"@types/greasemonkey": "^4.0.4",
+		"@types/node": "^18.14.2",
+		"esbuild": "^0.17.10",
+		"gh-pages": "^5.0.0",
+		"tsx": "^3.12.3"
+	}
+}
